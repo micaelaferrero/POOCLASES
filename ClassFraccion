@@ -1,0 +1,168 @@
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+
+class Fraccion
+{
+private:
+	int num;
+	int den;
+public:
+	Fraccion ()
+	{
+		num = 1;
+		den = 1;
+	}
+
+	void setnum (int n)
+	{
+		num = n;
+	}
+	void setden (int d)
+	{
+		den = d;
+	}
+	int getnum ()
+	{
+		return num;
+	}
+	int getden ()
+	{
+		return den;
+	}
+	
+	void leer ();
+	void mostrar ();
+	void simplificar ();
+	void sumarFraccion (Fraccion f1, Fraccion f2);
+	void multiplicarFraccion (Fraccion f1, Fraccion f2);
+	void multiplicacion (int n);
+	Fraccion Fraccion::multiplicar (Fraccion f2);
+	Fraccion Fraccion::simplificarn();
+};
+
+
+void Fraccion::leer ()
+{
+	cout <<" Ingrese el numerador: ";
+	cin >> num;
+	cout <<" Ingrese el denominador: ";
+	cin >> den;
+}
+
+void Fraccion::mostrar ()
+{
+	cout << num << "/" << den << endl;	
+}
+
+
+
+void Fraccion::simplificar ()
+{
+	int c = 2;
+	while (c <= num && c <= den)
+	{
+		if (num % c == 0 && den % c == 0)
+		{
+			num = num / c;
+			den = den / c;
+		}
+		else 
+		{
+			c++;
+		}
+	}
+}
+
+
+
+void Fraccion::sumarFraccion (Fraccion f1,Fraccion f2)
+{
+	int d3  = f1.getden () * f2.getden ();
+	int n3 = ((d3/f1.getden()) * f1.getnum ()) + ((d3/f2.getden()) * f2.getnum ());
+
+	setnum (n3);
+	setden (d3);
+
+	simplificar ();
+
+	cout <<" la suma es: " << num << "/" << den << endl;
+}
+
+
+void Fraccion::multiplicarFraccion (Fraccion f1, Fraccion f2)
+{
+	int n3 = f1.getnum () * f2.getnum ();//num=f1.getnum () * f2.getnum (); Otra manera de hacerlo
+	int d3 = f1.getden () * f2.getden ();//den=d3 = f1.getden () * f2.getden ()
+
+	//num=n3; Otra manera de hacerlo
+	//den=d3;
+	//setnum (n3== f1.getnum () * f2.getnum ()); Otra manera de hacerlo
+	//setden(d3=f1.getden () * f2.getden ());
+	setnum (n3);
+	setden (d3);
+
+	simplificar ();
+
+	cout <<" la multiplicacion de las fracciones es: " << num << "/" << den << endl;
+}
+
+void Fraccion::multiplicacion (int n)
+{
+	num = num * n;
+
+	simplificar ();
+
+	cout <<" la multiplicacion es: " << num << "/" << den << endl;
+}
+
+Fraccion Fraccion::multiplicar (Fraccion f2)
+{
+	Fraccion f3;
+	f3.setnum (getnum () * f2.getnum ());
+	f3.setden ( getden () * f2.getden ());
+	return f3;
+}
+Fraccion Fraccion::simplificarn()
+{int n,d;
+	Fraccion F3;
+	int c = 2;
+	while (c <= num && c <= den)
+	{
+		if (num % c == 0 && den % c == 0)
+		{
+			n = num / c;
+			d = den / c;
+		}
+		else 
+		{
+			c++;
+		}
+	}
+	F3.setnum(n);
+	F3.setden(d);
+	return F3;
+}
+
+	
+void main ()
+{
+	int n;
+	cout <<" ingrese numero: ";
+	cin >> n;
+	Fraccion f1, f2, f3,f4;
+	f1.leer();
+	f2.leer();
+	f1.simplificar ();
+	f1.mostrar ();
+	f3.sumarFraccion (f1, f2);
+	f3.multiplicarFraccion (f1, f2);
+	f1.multiplicacion (n);
+	f3 = f1.multiplicar (f2);
+	f3.mostrar ();
+	f4=f3.simplificarn();
+	f4.mostrar();
+	getch();
+}
