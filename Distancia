@@ -1,0 +1,89 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+
+class Distancia
+{
+private:
+	int m;
+	int cm;
+	int mm;
+
+public:
+	Distancia()
+	{
+		m=0;
+		cm=0;
+		mm=0;
+	}
+	void setm(int a)
+	{
+		m=a;
+	}
+	void setcm(int b)
+	{
+		cm=b;
+	}
+	void setmm(int c)
+	{
+		mm=c;
+	}
+	int getm()
+	{
+		return m;
+	}
+	int getcm()
+	{
+		return cm;
+	}
+	int getmm()
+	{
+		return mm;
+	}
+	void leer()
+	{
+		cout<<"Ingrese los METROS: ";
+		cin>>m;
+		cout<<"Ingrese los CENTIMETROS: ";
+		cin>>cm;
+		cout<<"Ingrese los MILIMETROS: ";
+		cin>>mm;
+	}
+	void distancia(Distancia d1, Distancia d2)
+	{int m1,cm1,mm1,m2,cm2,mm2,suma,m3,cm3,mm3;
+	
+	     
+	       m1=d1.getm();
+		   cm1=d1.getcm();
+		   mm1=d1.getmm();
+
+		   m2=d2.getm();
+		   cm2=d2.getcm();
+		   mm2=d2.getmm();
+
+		   suma=(m1*1000)+(m2*1000)+(cm1*10)+(cm2*10)+mm1+mm2;
+
+		   m3=suma/1000;
+		   setm(m3);
+		   suma=suma%1000;
+		   cm3=suma/10;
+		   setcm(cm3);
+		   mm3=suma%10;
+		   setmm(mm3);
+
+	}
+};
+
+void main()
+{ Distancia d1,d2,d3; 
+
+   d1.leer();
+   d2.leer();
+   d3.distancia(d1,d2);
+  cout<<"METROS"<<d3.getm()<<endl;
+   cout<<"CENTIMETROS"<<d3.getcm()<<endl;
+   cout<<"MILIMETROS"<<d3.getmm()<<endl;
+   getch();
+   
+}
