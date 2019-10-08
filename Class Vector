@@ -1,3 +1,5 @@
+// classVector.cpp: define el punto de entrada de la aplicaci�n de consola.
+
 #include "stdafx.h"
 #include "iostream"
 #include "conio.h"
@@ -66,7 +68,9 @@ void eliminarPri()
 
 tipoElem may();
 tipoElem menor();
+bool existe(tipoElem x);
 tipoElem maycercano(tipoElem y);
+tipoElem menorlejano(tipoElem z);
 }; //end class
 
 void vector::leer()
@@ -159,27 +163,28 @@ tipoElem vector::maycercano(tipoElem y)
 	return v2.menor();
 	
 }
+tipoElem vector::menorlejano(tipoElem z)
+{ vector v2; int j=0;
+	for(int i=0;i<n;i++)
+	{
+		if(v[i]<z)
+		{
+			v2.setElem(v[i],j);
+				j++;
+		}
+	}
+	
+	return v2.menor();
 
-#include "stdafx.h"
-#include "iostream"
-#include "conio.h"
-#include "Vector.h"
 
-using namespace std;
-
-
-void main()
-{ tipoElem p,c,m,y,mc;
-    int x;
-	vector v1;
-	v1.leer();
-	v1.imprimir();
-	cout<<endl;
-	cout<<" Ingrese elem ";
-	cin>>y;
-	mc=v1.maycercano(y);
-	cout<<endl;
-	cout<<" El elem mayor cercano es: ";
-	cout<<mc;
-	getch();
+	
+}
+bool vector::existe(tipoElem x)
+{
+	for(int i=0;i<n;i++)
+	{
+		if(v[i]==x)
+			return true;	
+	}
+	return false;
 }
