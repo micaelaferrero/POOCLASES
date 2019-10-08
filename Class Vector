@@ -1,0 +1,185 @@
+#include "stdafx.h"
+#include "iostream"
+#include "conio.h"
+
+using namespace std;
+
+typedef int tipoElem;
+const int MAX=50;
+
+class vector
+{
+private:
+   tipoElem v[MAX];
+   int n;
+
+public:
+   vector()
+   {
+	  n=0;	  
+   }
+
+void setElem(tipoElem x,int p){
+   v[p]=x;
+}
+
+int getElem(int p){
+  return v[p];
+}
+
+void setDim(int d){
+  n=d;
+}
+
+int getDim(){
+  return n;
+}
+
+void leer();
+
+void imprimir();
+
+bool vacio()
+{ return n==0; }
+
+bool lleno()
+{ return n==MAX; }
+
+void eliminarUlt(int p)
+{ eliminar(n-1); }
+
+void insertar(tipoElem x,int p);
+
+void insertarUlt(tipoElem x)
+{ insertar(x,n); }
+
+void insertarPri(tipoElem x)
+{ insertar(x,0); }
+
+void eliminar(int p);
+
+void eliminarUlt()
+{ eliminar(n-1); }
+
+void eliminarPri()
+{ eliminar(0); }
+
+tipoElem may();
+tipoElem menor();
+tipoElem maycercano(tipoElem y);
+}; //end class
+
+void vector::leer()
+{
+	cout<<"Cantidad elementos:";
+	cin>>n; 
+	 for(int i=0;i<n;i++)
+	 {
+	   cout<<"Elem:"; 
+	   cin>>v[i];
+	 }
+}
+
+void vector::imprimir()
+{
+	for(int i=0;i<n;i++) 
+	{
+		cout<<v[i]<<"  ";
+	}
+	getch();
+}
+
+void vector::insertar(tipoElem x, int p){
+  if(p<0 || p >= n) {	  
+	  cout<<"Posicion no valida...!!!";
+	  return ;
+  } 
+  if(lleno()){
+     cout<<"Vector lleno...!!!";
+	 return ;
+  }	 
+	int k=n-1;
+	while(k>=p){
+	   v[k+1]=v[k];
+	   k--;
+	}
+	 v[p]=x;
+	 n=n + 1;	
+}
+
+void vector::eliminar(int p){
+  if(p<0 || p >= n) {	  
+	  cout<<"Posicion no valida...!!!";
+	  return ;
+  } 
+  if(vacio()){
+     cout<<"Vector vacio...!!!";
+	 return ;
+  }	 
+	int k=p + 1;
+	while(k < n){
+	   v[k-1]=v[k];
+	   k++;
+	}	 
+	 n=n - 1;	
+}
+tipoElem vector::may()
+{
+	tipoElem may;
+	may=v[0];
+	for(int i=0;i<n;i++)
+	{
+		if(may<v[i])
+			may=v[i];
+	}
+	return may;
+}
+tipoElem vector::menor()
+{
+	tipoElem men;
+	men=v[0];
+	for(int i=1;i<n;i++)
+	{
+		if(men>v[i])
+			men=v[i];
+	}
+	return men;
+}
+tipoElem vector::maycercano(tipoElem y)
+{ vector v2; int j=0;
+	for(int i=0;i<n;i++)
+	{
+		if(v[i]>y)
+		{
+			v2.setElem(v[i],j);
+				j++;
+		}
+	}
+	
+	return v2.menor();
+	
+}
+
+#include "stdafx.h"
+#include "iostream"
+#include "conio.h"
+#include "Vector.h"
+
+using namespace std;
+
+
+void main()
+{ tipoElem p,c,m,y,mc;
+    int x;
+	vector v1;
+	v1.leer();
+	v1.imprimir();
+	cout<<endl;
+	cout<<" Ingrese elem ";
+	cin>>y;
+	mc=v1.maycercano(y);
+	cout<<endl;
+	cout<<" El elem mayor cercano es: ";
+	cout<<mc;
+	getch();
+}
