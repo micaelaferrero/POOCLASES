@@ -188,3 +188,4 @@ bool vector::existe(tipoElem x)
 	}
 	return false;
 }
+
