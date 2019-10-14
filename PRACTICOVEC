@@ -1,0 +1,195 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+typedef int tipoElem;
+const int MAX=50;
+
+class vector
+{
+private:
+   tipoElem v[MAX];
+   int n;
+
+public:
+   vector()
+   {
+	  n=0;	  
+   }
+
+void setElem(tipoElem x,int p){
+   v[p]=x;
+}
+
+int getElem(int p){
+  return v[p];
+}
+
+void setDim(int d){
+  n=d;
+}
+
+int getDim(){
+  return n;
+}
+
+void leer();
+
+void imprimir();
+
+bool vacio()
+{ return n==0; }
+
+bool lleno()
+{ return n==MAX; }
+
+void eliminarUlt(int p)
+{ eliminar(n-1); }
+
+void insertar(tipoElem x,int p);
+
+void insertarUlt(tipoElem x)
+{ insertar(x,n); }
+
+void insertarPri(tipoElem x)
+{ insertar(x,0); }
+
+void eliminar(int p);
+
+void eliminarUlt()
+{ eliminar(n-1); }
+
+void eliminarPri()
+{ eliminar(0); }
+
+int Kesimomenor(int k);
+vector interseccion1(vector v1);
+void frecuencia();
+void interseccion2(vector v1,vector v2);
+}; //end class
+
+void vector::leer()
+{
+	cout<<"Ingrese la dimencion del vector:";
+	cin>>n; 
+	for(int i=0; i<n; i++)
+	{
+		cout<<"V["<<i<<"]= ";
+		cin>>v[i];
+	}
+
+}
+
+
+void vector::imprimir()
+{
+	for(int i=0;i<getDim();i++) {
+	  cout<<getElem(i)<<"  ";
+	}
+	cout<<endl;
+}
+
+void vector::insertar(tipoElem x, int p){
+  if(p<0 || p > n) {	  
+	  cout<<"Posicion no valida...!!!";
+	  return ;
+  } 
+  if(lleno()){
+     cout<<"Vector lleno...!!!";
+	 return ;
+  }	 
+	int k=n-1;
+	while(k>=p){
+	   v[k+1]=v[k];
+	   k--;
+	}
+	 v[p]=x;
+	 n=n + 1;	
+}
+
+void vector::eliminar(int p){
+  if(p<0 || p >= n) {	  
+	  cout<<"Posicion no valida...!!!";
+	  return ;
+  } 
+  if(vacio()){
+     cout<<"Vector vacio...!!!";
+	 return ;
+  }	 
+	int k=p + 1;
+	while(k < n){
+	   v[k-1]=v[k];
+	   k++;
+	}	 
+	 n=n - 1;	
+}
+int vector::Kesimomenor(int k){
+	int kesimo;
+	for(int i=0;i<n;i++){
+		int c=0;
+		for(int j=0;j<n;j++){
+			if(v[i]>v[j]){
+				c++;
+			}
+		}
+		if(c==k-1){
+			kesimo=v[i];
+			break;
+		}
+	}
+	return kesimo;
+}
+vector vector::interseccion1(vector v1){
+	vector v3;
+	for(int i=0;i<v1.getDim();i++){
+		for(int j=0;j<getDim();j++){
+			if(v1.getElem(i)==getElem(j)&&i==j){
+				v3.insertarUlt(v1.getElem(i));
+			}
+		}
+	}
+	return v3;
+}
+void vector::frecuencia(){
+	for(int i=0;i<n;i++){
+		int conti=1;
+		int j=i+1;
+		while(j<n){
+			if(v[i]==v[j])
+			{
+				eliminar(j);
+				conti++;
+			}
+			else
+				j=j+1;
+		}
+		cout<<v[i]<<"="<<conti<<endl;
+	}
+}
+void vector::interseccion2(vector v1,vector v2){
+	for(int i=0;i<v1.getDim();i++){
+		for(int j=0;j<v2.getDim();j++){
+			if(v1.getElem(i)==v2.getElem(j)&&i==j){
+				insertarUlt(v1.getElem(i));
+			}
+		}
+	}
+}
+
+void main()
+{
+	vector v1,v2,v3;
+	v1.leer();
+	v2.leer();
+	v3=v2.interseccion1(v1);
+	cout<<"Interccion 1:"<<endl;
+	v3.imprimir();
+	v2.interseccion2(v1,v2);
+	cout<<"Interccion 2: "<<endl;
+	v2.imprimir();
+	cout<<"FRECUENCIA: "<<endl;
+	v1.frecuencia();
+	getch();
+}
