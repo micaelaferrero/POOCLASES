@@ -1,0 +1,201 @@
+..............Empledo.h...............
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <stdio.h>
+#include "Fecha.h"
+using namespace std;
+
+class Empleado
+{
+private: 
+	int codigo;
+	char nombre[30];
+	char paterno[30];
+	char materno[30];
+	Fecha fechaIngreso;
+	Fecha fechaNacimiento;
+
+public:
+	void setcodigo(int c)
+	{
+		codigo=c;
+	}
+	int getcodigo()
+	{
+		return codigo;
+	}
+	void setnom(char *no)
+	{
+		nombre[0]= '\0';
+			strcat(nombre,no);
+	}
+	char *getnom()
+	{
+		return nombre;
+	}
+	void setpat(char *pa)
+	{
+		nombre[0]= '\0';
+			strcat(paterno,pa);
+	}
+	char *getpat()
+	{
+		return paterno;
+	}
+	void setmat(char *ma)
+	{
+		nombre[0]= '\0';
+			strcat(materno,ma);
+	}
+	char *getmat()
+	{
+		return materno;
+	}
+	void setfechaI(Fecha fi)
+	{
+		fechaIngreso=fi;
+	}
+	Fecha getfechaI()
+	{
+		return fechaIngreso;
+	}
+
+	void setfechaN(Fecha fn)
+	{
+		fechaNacimiento=fn;
+	}
+	Fecha getfechaN()
+	{
+		return fechaNacimiento;
+	}
+	void leerE();
+	void mostrarE();
+	int Cantidadanho();
+};
+
+void Empleado::leerE()
+	{ int cod;
+    char nom[30];
+	char pat[30];
+	char mat[30];
+	printf("codigo:");
+	scanf("%i",&cod);
+	setcodigo(cod);
+	printf("nombre:");
+	setnom(nom);
+	scanf("%s",&nom);
+	printf("Paterno:");
+	scanf("%s",&pat);
+	setpat(pat);
+	printf("Materno:");
+	scanf("%s",&mat);
+	setmat(mat);
+	fechaIngreso.leerF();
+	fechaNacimiento.leerF();
+
+	}
+void Empleado::mostrarE()
+	{	
+		printf("codigo:");
+		printf("%i\n",getcodigo());
+		printf("Nombre:");
+		printf("%s\n",getnom());
+		printf("Paterno:");
+		printf("%s\n",getpat());
+		printf("Materno:");
+		printf("%s\n",getmat());
+		cout<<"Fecha INGRESO";
+		fechaIngreso.mostrarF();
+		cout<<"Fecha NACIEMIENTO";
+		fechaNacimiento.mostrarF();
+	
+	}
+
+int Empleado::Cantidadanho()
+{
+	int c;
+	c=2019-fechaIngreso.getAnho();
+	return c;
+}
+int Empleado::CantidadN()
+{
+	int n;
+	c=2019-fechaNacimiento.getAnho();
+	return n;
+}
+........Fecha.h..........
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+
+const int diaMes[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+
+class Fecha{
+private:
+ int dia;
+ int mes;
+ int anho;
+
+public:
+ Fecha() {
+   dia=mes=anho=0;   
+ }
+
+ void setDia(int d)
+ { dia=d; }
+ 
+ int getDia()
+ { return dia; }
+
+ void setMes(int m)
+ { mes=m; }
+ 
+ int getMes()
+ { return mes; }
+
+ void setAnho(int a)
+ { anho=a; }
+ 
+ int getAnho()
+ { return anho; }
+
+ void leerF();
+void  mostrarF();
+
+}; //fin clase
+
+void Fecha::leerF()
+{
+	cout<<"Ingrese el dia";
+	cin>>dia;
+	cout<<"Ingrese el mes";
+	cin>>mes;
+	cout<<"Ingrese el anho";
+	cin>>anho;
+}
+void Fecha:: mostrarF()
+{
+	cout<<dia<<"/"<<mes<<"/"<<anho;
+	
+}
+// Lab HERENCIA.cpp : Defines the entry point for the console application.
+//PREGUNTA3
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "Empleado.h"
+using namespace std;
+
+void main()
+{int c;
+	Empleado E1;
+	E1.leerE();
+	E1.mostrarE();
+	c= E1.Cantidadanho();
+	cout<<"Cantidad de anho del Emplado es: ";
+	cout<<c;
+
+}
