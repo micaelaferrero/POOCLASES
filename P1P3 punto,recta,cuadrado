@@ -1,0 +1,126 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+
+class Punto 
+{
+private:
+	int x;
+	int y;
+public:
+	Punto(){}
+	void setx(int a)
+	{
+		x=a;
+	}
+	int getx()
+	{
+		return x;
+	}
+	void sety(int b)
+	{
+		y=b;
+	}
+	int gety()
+	{
+		return y;
+	}
+	void leerP()
+	{
+		cout<<"Ingrese La coordenada X";
+		cin>>x;
+		cout<<"Ingrese La coordenada Y";
+		cin>>y;
+	}
+	void mostrar()
+	{
+		cout<<"La coordenada X es :";
+		cout<<x;
+		cout<<"La coordenadaY es :";
+		cout<<y;
+
+	}
+
+};
+
+------------------Recta-------------
+#include "stdafx.h"
+#include "Punto.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+
+class Recta
+{
+private:
+	Punto p1;
+	Punto p2;
+public:
+	Recta()
+	{}
+	void leerR()
+	{
+		p1.leerP();
+		p2.leerP();
+	}
+
+};
+
+-----------------Cuadrado--------------
+#include "stdafx.h"
+#include "Recta.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+
+class Cuadrado
+{
+private:
+	Recta r1;
+	Recta r2;
+	Recta r3;
+	Recta r4;
+	int Lado;
+public:
+	Cuadrado()
+	{}
+	void leerC()
+	{
+		r1.leerR();
+		r2.leerR();
+		r3.leerR();
+		r4.leerR();
+		cout<<"Ingrese el lado del triangulo :";
+		cin>>Lado;
+	}
+	int Area();
+};
+
+int Cuadrado::Area()
+{
+	int A;
+	A=Lado*Lado;
+	return A;
+}
+
+------------Main-----------
+// P1P3.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "Cuadrado.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+
+
+void main()
+{int A;
+	Cuadrado C1;
+	C1.leerC();
+	A=C1.Area();
+	cout<<"El area del cuadrado es:";
+	cout<<A;
+	getch();
+}
