@@ -1,0 +1,198 @@
+---------Empleado-------------
+#include "stdafx.h"
+#include <stdio.h>
+#include "iostream"
+#include "Fecha.h"
+
+using namespace std;
+
+class Empleado{
+private:
+ int codigo;
+ char nombre[40];
+ char paterno[30];
+ char materno[30];
+ Fecha fechaIngreso;
+ Fecha fechaNacimiento;
+public:
+	void setCodigo(int c)
+	{ codigo = c; }
+	int getCodigo()
+	{ return codigo; }
+
+	void setNombre(char  *no){
+	nombre[0] = '\0';
+	strcat(nombre, no);
+	}
+
+	char *getNombre()
+	{ return nombre; }
+
+	void setPaterno(char  *pa){
+		paterno[0] = '\0';
+		strcat(paterno, pa);
+	}
+
+	char *getPaterno()
+	{ return paterno; }
+
+	void setMaterno(char  *ma){
+		materno[0] = '\0';
+		strcat(materno, ma);
+	}
+
+	char *getMaterno()
+	{ return materno; }
+
+	void setFechaIng(Fecha fi)
+	{ fi.leerFecha(); }
+
+	Fecha getFechaIng()
+	{ return fechaIngreso; }
+
+	void setFechaNac(Fecha fn)
+	{ fn.leerFecha(); }
+
+	Fecha getFechaNac()
+	{ return fechaNacimiento; }
+
+	void leerEmpleado();
+	void mostrarEmpleado();
+	int calcularEdad();
+	int calcularAnhoAntiguedad();
+	int calcularCantidadMeses();
+};
+
+void Empleado::leerEmpleado(){
+	int cod;
+	char nom[40];
+	char pat[30];
+	char mat[30];
+	Fecha fi;
+	Fecha fn;
+
+	printf("Codigo: ");
+	scanf("%i", &cod);
+	setCodigo(cod);
+
+	printf("Nombre: ");
+	scanf("%s", &nom);
+	setNombre(nom);
+
+	printf("Paterno: ");
+	scanf("%s", &pat);
+	setPaterno(pat);
+
+	printf("Materno: ");
+	scanf("%s", &mat);
+	setMaterno(mat);
+	cout << "Fecha de ingreso: " << endl;
+	fechaIngreso.leerFecha();
+	cout << "Fecha de Nacimiento: " << endl;
+	fechaNacimiento.leerFecha();
+}
+
+void Empleado::mostrarEmpleado(){
+	printf("Codigo: ");
+	printf("%i\n", getCodigo());
+	printf("Nombre: ");
+	printf("%s\n", getNombre());
+	printf("Paterno: ");
+	printf("%s\n", getPaterno());
+	printf("Materno: ");
+	printf("%s\n", getMaterno());
+	cout << "Fecha de ingreso: ";
+	fechaIngreso.mostrarFecha();
+	cout << endl << "Fecha de Nacimiento: ";
+	fechaNacimiento.mostrarFecha();
+	cout << endl;
+}
+
+int Empleado::calcularEdad(){
+	int e = 2019 - fechaNacimiento.getAnho();
+	return e;
+}
+
+int Empleado::calcularAnhoAntiguedad(){
+	int a = 2019 - fechaIngreso.getAnho();
+	return a;
+}
+
+int Empleado::calcularCantidadMeses(){
+	Fecha fa;
+	cout << "Ingresar Fecha Actual: " << endl;
+	fa.leerFecha();
+	fa.mostrarFecha();
+	cout << endl;
+	if(fa.getMes() > fechaIngreso.getMes())
+		return (calcularAnhoAntiguedad()*12) + (fa.getMes() - fechaIngreso.getMes());
+	else
+		return (calcularAnhoAntiguedad()*12) - (fechaIngreso.getMes() - fa.getMes());
+}
+
+
+----------Fecha---------------
+
+
+#include "stdafx.h"
+#include "iostream"
+#include "conio.h"
+
+using namespace std;
+
+const int diaMes [13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+
+class Fecha {
+private:
+ int dia;
+ int mes;
+ int anho;
+
+public:
+ Fecha() {
+   dia = mes = anho = 0;   
+ }
+
+ void setDia(int d)
+ {dia = d; }
+ 
+ int getDia ()
+ {return dia; }
+
+ void setMes (int m)
+ {mes = m; }
+ 
+ int getMes ()
+ {return mes; }
+
+ void setAnho (int a)
+ {anho = a; }
+ 
+ int getAnho ()
+ {return anho; }
+
+ void leerFecha();
+ void mostrarFecha();
+
+};
+
+------Main----
+
+// P3P3.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "Empledo.h"
+
+void main(){
+	Empleado E1;
+	E1.leerEmpleado();
+	E1.mostrarEmpleado();
+	int e = E1.calcularEdad();
+	 cout << "La edad es: " <<e<< endl;;
+	int a = E1.calcularAnhoAntiguedad();
+	 cout << "Anhos de Antiguedad: " <<a<< endl;
+	int m = E1.calcularCantidadMeses();
+	 cout << "La cantidad de meses es: "<<m<< endl;
+	 getch();
+}
