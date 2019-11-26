@@ -1,0 +1,347 @@
+es (159 sloc) 3.38 KB 
+Raw
+Blame
+History
+
+
+// lab3.cpp : Defines the entry point for the console application.
+
+//
+
+
+
+#include "stdafx.h"
+
+#include "conio.h"
+
+#include <iostream>
+
+#include "stdio.h"
+
+
+
+using namespace std;
+
+
+
+class Hora
+
+{
+
+private:
+
+
+
+	int hra;
+
+	int seg;
+
+	int min;
+
+
+
+public:
+
+
+
+	Hora()
+
+	{
+
+		hra=0;
+
+		seg=0;
+
+		min=0;
+
+	}
+
+	void setHra(int h) //insertores
+
+	{
+
+		hra=h;
+
+	}
+
+	void setMin(int m)
+
+	{
+
+		min=m;
+
+	}
+
+	void setSeg(int s)
+
+	{
+
+		seg=s;
+
+	}
+
+	int getHra() //extractores
+
+	{
+
+		return hra;
+
+	}
+
+	int getSeg()
+
+	{
+
+		return seg;
+
+	}
+
+	int getMin()
+
+	{
+
+		return min;
+
+	}
+
+	void leerHora()
+
+	{
+
+	int h,s,m;
+
+	cout<<"ingrese hora: ";
+
+	cin>>h;
+
+	hra=h;
+
+	cout<<"ingrese minutos: ";
+
+	cin>>m;
+
+	min=m;
+
+	cout<<"ingrese segundos: ";
+
+	cin>>s;
+
+	seg=s;
+
+
+
+	}
+
+	void mostrarHora()
+
+	{
+
+	cout<<hra<<":"<<min<<":"<<seg<<endl; //como esta dentro de la clase, no uso hora1.getHra(h1)......
+
+	}
+
+	//implementamos metodos
+
+	void aumentar1seg() //si quisiera aumentar mas de un seg, le mando como parametro un int seg para ahi mandar cuantos segundos aumentar
+
+	{
+
+		seg++;
+
+		if(seg==60)
+
+		{
+
+			min=min+1;
+
+			seg=0;
+
+			if(min==60)
+
+			{
+
+				min=0;
+
+				hra=hra+1;
+
+				if(hra==24)
+
+				hra=0;
+
+			}
+
+		}
+
+	}
+
+void aumentarXseg(int segundos) //si quisiera aumentar mas de un seg, le mando como parametro un int seg para ahi mandar cuantos segundos aumentar
+
+{
+
+	int i=0;
+
+	while(i<segundos)
+
+	{	seg++;
+
+		if(seg==60)
+
+		{
+
+			min=min+1;
+
+			seg=0;
+
+			if(min==60)
+
+			{
+
+				min=0;
+
+				hra=hra+1;
+
+				if(hra==24)
+
+				hra=0;
+
+			}
+
+		}
+
+		i++;
+
+	}
+
+}
+
+	void diferencia(Hora hora1, Hora hora2) //me lo guarda en hora 3 por eso usa los dos atributos esta vez como paramettos
+
+	{
+
+		int HaS1,MaS1,HaS2,MaS2,SaS1,SaS2,h3,m3,s3;
+
+		
+
+		HaS1=hora1.getHra()*3600;
+
+		HaS2=hora2.getHra()*3600;
+
+		MaS1=hora1.getMin()*60;
+
+		MaS2=hora2.getMin()*60;
+
+		SaS1=hora1.getSeg();
+
+		SaS2=hora2.getSeg();
+
+
+
+		h3=HaS2-HaS1;
+
+		m3=MaS2-MaS1;
+
+		s3=SaS2-SaS1;
+
+
+
+		setHra(h3/3600); //no es necesario poner hora3.setHra(h3/3600) porque  el hora 3 ya se asume ya que no lo mando como parametro
+
+		setMin(m3/60); //pero es necesario el set.Hra(h3/3600) porque hay mas de un atributo en juego
+
+		setSeg(s3);
+
+	}
+
+
+
+}; //end class
+
+
+
+void main()
+
+{
+
+	int segundosaumentar;
+
+	Hora hora1,hora2,hora3;
+
+	/*
+
+	SIN LAS FUNCIONES ES ASI
+
+	int h1,m1,s1;
+
+	cout<<"----------HORA 1-----------"<<endl;
+
+	cout<<" introdusca hora: "; //esto igual lo hacemos en una funcion (leer) pero tiene un cambio
+
+	cin>>h1;
+
+	cout<<"introdusca minutos: ";
+
+	cin>>m1;
+
+	cout<<"introdusca segundos: ";
+
+	cin>>s1;
+
+	//asignamos estas horas al objeto h1;
+
+	hora1.setHra(h1);
+
+	hora1.setMin(m1);
+
+	hora1.setSeg(s1); //hasta aqui va leer pero esto ya no se usa, se asigna directo ya que estaria dentro de la clase la funcion
+
+	//imprimir el objeto hora1
+
+	cout<<"LA HORA 1 ES:"<<endl;
+
+	cout<<hora1.getHra()<<":"<<hora1.getMin()<<":"<<hora1.getSeg()<<endl;
+
+	//para facilitar las cosas vamos a hacer los imprimir dentro de una funcion, que van a ir en los primeros metodos (mostrar)
+
+	*/
+
+	cout<<"----------HORA 1-----------"<<endl;
+
+	hora1.leerHora();
+
+	cout<<"hora actual"<<endl;
+
+	hora1.mostrarHora();
+
+	cout<<"hora con un segundo aumentado"<<endl;
+
+	cout<<"ingrese cuantos segundos aumentar"<<endl;
+
+	cin>>segundosaumentar;
+
+	hora1.aumentarXseg(segundosaumentar);
+
+	hora1.mostrarHora();
+
+	/*cout<<"----------HORA 2-----------"<<endl;
+
+	hora2.leerHora();
+
+	cout<<"hora actual"<<endl;
+
+	hora2.mostrarHora();
+
+	cout<<"hora con un segundo aumentado"<<endl;
+
+	hora2.aumentar1seg();
+
+	hora2.mostrarHora();
+
+	cout<<"DIFERENCIA"<<endl;
+
+	hora3.diferencia(hora1,hora2);
+
+	hora3.mostrarHora();*/
+
+	getch();
+
+}
