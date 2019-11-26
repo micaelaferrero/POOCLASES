@@ -102,7 +102,7 @@ public:
 
 #include <iostream>
 
-#include "Recta.h" 
+#include "punto.h" 
 
 
 
@@ -110,7 +110,7 @@ using namespace std;
 
 
 
-class triangulo : public Recta {
+class triangulo : public punto {
 
 	private:
 
