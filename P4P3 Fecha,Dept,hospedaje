@@ -1,0 +1,284 @@
+------------Fecha---------------
+
+#include "stdafx.h"
+#include "iostream"
+#include "conio.h"
+
+using namespace std;
+
+const int diaMes [13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+
+class Fecha {
+private:
+ int dia;
+ int mes;
+ int anho;
+
+public:
+ Fecha() {
+   dia = mes = anho = 0;   
+ }
+
+ void setDia(int d)
+ {dia = d; }
+ 
+ int getDia ()
+ {return dia; }
+
+ void setMes (int m)
+ {mes = m; }
+ 
+ int getMes ()
+ {return mes; }
+
+ void setAnho (int a)
+ {anho = a; }
+ 
+ int getAnho ()
+ {return anho; }
+
+ void leerFecha();
+ void mostrarFecha();
+ int diferencia(Fecha f1, Fecha f2);
+
+};
+
+void Fecha::leerFecha(){
+	cout << "Dia:"; cin >> dia;		
+	cout << "Mes:"; cin >> mes;		
+	cout << "Anho:"; cin >> anho;	
+}
+
+void Fecha::mostrarFecha(){
+	cout << dia << "/" << mes << "/" << anho;
+}
+
+int Fecha::diferencia(Fecha f1, Fecha f2){
+	int d1,m1,a1,d2,m2,a2,d3,m3,fecha1,fecha2,dif,d,m,a;
+	d1=f1.getDia();
+	d2=f2.getDia();
+	m1=f1.getMes();
+	m2=f2.getMes();
+	a1=f1.getAnho();
+	a2=f2.getAnho();
+	fecha1=d1+(m1*30)+(a1*365);
+	fecha2=d2+(m2*30)+(a2*365);
+	dif=fecha2-fecha1;
+	return dif;
+}
+
+-----------Dept-----------
+#include "stdafx.h"
+#include <stdio.h>
+#include "iostream"
+
+using namespace std;
+
+class Departamento{
+private:
+ int codigo;
+ char descripcion[40];
+ float precio;
+public:
+	void setCodigo(int c)
+	{ codigo = c; }
+	int getCodigo()
+	{ return codigo; }
+
+	void setDescripcion(char  *no){
+	descripcion[0] = '\0';
+	strcat(descripcion, no);
+	}
+
+	char *getDescripcion()
+	{ return descripcion; }
+
+	void setPrecio(float p)
+	{ precio = p; }
+
+	float getPrecio()
+	{ return precio; }
+
+	void leerDpto();
+	void mostrarDpto();
+	void buscarPorCodigo(int x);
+};
+
+void Departamento::leerDpto(){
+	int cod;
+	char des[40];
+	float pre;
+
+	printf("Codigo: ");
+	scanf("%i", &cod);
+	setCodigo(cod);
+
+	printf("Descripcion: ");
+	scanf("%s", &des);
+	setDescripcion(des);
+
+	printf("Precio: ");
+	scanf("%f", &pre);
+	setPrecio(pre);
+}
+
+void Departamento::mostrarDpto(){
+	printf("Codigo: ");
+	printf("%i\n", getCodigo());
+	printf("Descripcion: ");
+	printf("%s\n", getDescripcion());
+	printf("Precio: ");
+	printf("%f\n", getPrecio());
+	cout << endl;
+}
+
+------------Hospedaje-----------
+
+#include "stdafx.h"
+#include "Fecha.h"
+#include "Departamento.h"
+
+using namespace std;
+
+class Hospedaje
+{
+private:
+ int nro;
+ Fecha fechaEntrada;
+ Fecha fechaSalida;
+ float descuento;
+ int codigo;
+ char nombreCliente[50];
+ float MontoTotal;
+ Departamento D1, D2, D3;
+public:
+	void setNro(int n)
+	{ nro = n; }
+	int getNro()
+	{ return nro; }
+
+	void setFechaEntrada(Fecha fe)
+	{ fe.leerFecha(); }
+
+	Fecha getFechaEntrada()
+	{ return fechaEntrada; }
+
+	void setFechaSalida(Fecha fs)
+	{ fs.leerFecha(); }
+
+	Fecha getFechaSalida()
+	{ return fechaSalida; }
+
+	void setDescuento(float d)
+	{ descuento = d; }
+	float getDescuento()
+	{ return descuento; }
+
+	void setCodigo(int c)
+	{ codigo = c; }
+	int getCodigo()
+	{ return codigo; }
+
+	void setNombreCliente(char  *no){
+	nombreCliente[0] = '\0';
+	strcat(nombreCliente, no);
+	}
+
+	char *getNombreCliente()
+	{ return nombreCliente; }
+
+	
+	void setMontoTotal(float m)
+	{ MontoTotal = m; }
+	float getMontoTotal()
+	{ return MontoTotal; }
+
+	void leerHospedaje();
+	void mostrarHospedaje();
+	float montoTotal();
+	float buscarPorCodigo(Departamento D1, Departamento D2, Departamento D3, int cod);
+};
+
+void Hospedaje::leerHospedaje(){
+	cout << "Departamento 1" <<endl;
+	D1.leerDpto();
+	cout << "Departamento 2" << endl;
+	D2.leerDpto();
+	cout << "Departamento 3" << endl;
+	D3.leerDpto();
+
+	int cod, nro;
+	float des, monto;
+	char nomCli[40];
+
+	cout << "------------------------------------------------------" << endl;
+
+	printf("Numero: ");
+	scanf("%i", &nro);
+	setNro(nro);
+
+	cout << "Fecha de Entrada: " << endl;
+	fechaEntrada.leerFecha();
+	cout << "Fecha de Salida: " << endl;
+	fechaSalida.leerFecha();
+	cout << endl;
+
+	printf("Descuento%: ");
+	scanf("%f", &des);
+	setDescuento(des);
+
+	printf("Codigo: ");
+	scanf("%i", &cod);
+	setCodigo(cod);
+
+	printf("Nombre del Cliente: ");
+	scanf("%s", &nomCli);
+	setNombreCliente(nomCli);
+}
+
+void Hospedaje::mostrarHospedaje(){
+	cout << "------------------------------------------------------------" << endl;
+	printf("Numero: ");
+	printf("%i\n", getNro());
+	cout << endl << "Fecha de Entrada: ";
+	fechaEntrada.mostrarFecha();
+	cout << endl << "Fecha de Salida: ";
+	fechaSalida.mostrarFecha();
+	printf("Descuento :");
+	printf("%f\n", getDescuento());
+	printf("Codigo: ");
+	printf("%i\n", getCodigo());
+	printf("Nombre Cliente: ");
+	printf("%s\n", getNombreCliente());
+
+	Fecha F1;
+	int estadia = F1.diferencia(fechaEntrada, fechaSalida);
+	cout << "Estadia: " << estadia << endl;
+
+	float pre = buscarPorCodigo(D1, D2, D3, getCodigo());
+
+	float monto = estadia*pre - (estadia*pre*(getDescuento()/100));
+	printf("Monto Total: ");
+	printf("%f\n", monto);
+}
+
+float Hospedaje::buscarPorCodigo(Departamento D1, Departamento D2, Departamento D3, int cod){
+	if(cod == D1.getCodigo())
+		return D1.getPrecio();
+	if(cod == D2.getCodigo())
+		return D2.getPrecio();
+	if(cod == D3.getCodigo())
+		return D3.getPrecio();
+}
+
+-----------Main--------------
+#include "stdafx.h"
+#include "Hospedaje.h"
+#include "conio.h"
+
+void main(){
+	Hospedaje H1;
+	H1.leerHospedaje();
+	H1.mostrarHospedaje();
+	getch();
+}
