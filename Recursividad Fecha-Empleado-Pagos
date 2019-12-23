@@ -340,7 +340,7 @@ private:
 	Empleado E3;
 	Empleado E4;
 
-int mult(int a, int b)
+int mult(float a, int b)
 {
  if(a==0 ||  b==0)
    return 0;
@@ -348,6 +348,7 @@ int mult(int a, int b)
    {
     return a+mult(a,b-1);
    }
+
 }
 
 public:
@@ -474,10 +475,11 @@ void Pagos::mostrar()
 	cout<<"Dias trabajados: "<<dias<<endl;
 	float pago=BuscarEmpleado(E1, E2, E3, E4, getCodigo());
 	cout<<"El pago correspondiente es de: "<<pago<<endl;
-	float PagoTotal=(pago*dias);
+	float PagoTotal=mult(pago,dias);
 	printf("Pago Total al empleado: ");
 	printf("%f\n", PagoTotal);
 }
+
 
 -----------MAIN-----------
 
