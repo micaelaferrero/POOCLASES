@@ -1,0 +1,502 @@
+------------EMPLEADO.h--------------------
+#include "stdafx.h"
+#include "iostream"
+#include <stdio.h>
+using namespace std;
+
+class Empleado
+{
+private:
+	int Codigo;
+	char Nombre[40];
+	char Apellidos[50];
+	float PagXDia;
+public:
+	Empleado()
+	{
+		Codigo=0;
+		PagXDia=0;
+	}
+
+	void setCodigo(int cod)
+	{ Codigo=cod; }
+	int getCodigo()
+	{ return Codigo; }
+	
+	void setNombre(char *nom)
+	{ Nombre[0]='\0';
+	strcat(Nombre, nom);}
+	char *getNombre()
+	{ return Nombre;}
+		
+	void setApellidos(char *ape)
+	{ Apellidos[0]='\0';
+	strcat(Apellidos, ape);}
+
+	char *getApellidos()
+	{ return Apellidos;}
+
+	void setPagDia(int pxd)
+	{ PagXDia=pxd; }
+	float getPagDia()
+	{ return PagXDia; }
+	
+
+	void leer();
+	void mostrar();
+
+};
+	void Empleado::leer()
+	{
+		int Codigo;
+		char Nom[40];
+		char Ape[50];
+		float PXD;
+		
+		printf("Codigo: ");
+		scanf("%i", &Codigo);
+		setCodigo(Codigo);
+		
+		printf("Nombre: ");
+		scanf("%s", &Nom);
+		setNombre(Nom);
+
+		printf("Apellidos: ");
+		scanf("%s", &Ape);
+		setApellidos(Ape);
+
+		printf("Pago por Dia: ");
+		scanf("%f", &PXD);
+		setPagDia(PXD);
+
+	}
+
+
+	void Empleado::mostrar()
+	{
+		printf("Codigo: ");
+		printf("%i\n", getCodigo());
+		printf("Nombre: ");
+		printf("%s\n", getNombre());
+		printf("Apellidos: ");
+		printf("%s\n", getApellidos());
+		cout<<"Fecha de Ingreso: "<<endl;
+		printf("Pago por Dia: ");
+		printf("%f\n", getPagDia());
+	}
+  
+  ------------FECHA.h------------
+  #include "stdafx.h"
+#include "iostream"
+#include "conio.h"
+using namespace std;
+
+const int diaMes [13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+
+class Fecha {
+
+private:
+
+ int dia;
+ int mes;
+ int anho;
+
+public:
+
+ Fecha() {
+
+   dia = mes = anho = 0;   
+
+ }
+
+
+
+ void setDia(int d)
+
+ {dia = d; }
+
+ 
+
+ int getDia ()
+
+ {return dia; }
+
+
+
+ void setMes (int m)
+
+ {mes = m; }
+
+ 
+
+ int getMes ()
+
+ {return mes; }
+
+
+
+ void setAnho (int a)
+
+ {anho = a; }
+
+ 
+
+ int getAnho ()
+
+ {return anho; }
+
+
+
+ void leerFecha();
+
+ void mostrarFecha();
+
+ int diferencia(Fecha f1, Fecha f2);
+
+
+
+};
+
+
+
+void Fecha::leerFecha(){
+
+	cout << "Dia:"; cin >> dia;		
+
+	cout << "Mes:"; cin >> mes;		
+
+	cout << "Anho:"; cin >> anho;	
+
+}
+
+
+
+void Fecha::mostrarFecha(){
+
+	cout << dia << "/" << mes << "/" << anho;
+
+}
+
+
+
+int diferencia(Fecha f1, Fecha f2){
+
+	int d1,m1,a1,d2,m2,a2,d3,m3,fecha1,fecha2,dif,d,m,a;
+	d1=f1.getDia();
+	d2=f2.getDia();
+	m1=f1.getMes();
+
+	m2=f2.getMes();
+
+	a1=f1.getAnho();
+
+	a2=f2.getAnho();
+
+	fecha1=d1+(m1*30)+(a1*365);
+
+	fecha2=d2+(m2*30)+(a2*365);
+
+	dif=fecha2-fecha1;
+
+	return dif;
+
+}#include "stdafx.h"
+#include "iostream"
+#include "conio.h"
+using namespace std;
+
+const int diaMes [13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+
+class Fecha {
+
+private:
+
+ int dia;
+ int mes;
+ int anho;
+
+public:
+
+ Fecha() {
+
+   dia = mes = anho = 0;   
+
+ }
+
+
+
+ void setDia(int d)
+
+ {dia = d; }
+
+ 
+
+ int getDia ()
+
+ {return dia; }
+
+
+
+ void setMes (int m)
+
+ {mes = m; }
+
+ 
+
+ int getMes ()
+
+ {return mes; }
+
+
+
+ void setAnho (int a)
+
+ {anho = a; }
+
+ 
+
+ int getAnho ()
+
+ {return anho; }
+
+
+
+ void leerFecha();
+
+ void mostrarFecha();
+
+ int diferencia(Fecha f1, Fecha f2);
+
+
+
+};
+
+
+
+void Fecha::leerFecha(){
+
+	cout << "Dia:"; cin >> dia;		
+
+	cout << "Mes:"; cin >> mes;		
+
+	cout << "Anho:"; cin >> anho;	
+
+}
+
+
+
+void Fecha::mostrarFecha(){
+
+	cout << dia << "/" << mes << "/" << anho;
+
+}
+
+
+
+int diferencia(Fecha f1, Fecha f2){
+
+	int d1,m1,a1,d2,m2,a2,d3,m3,fecha1,fecha2,dif,d,m,a;
+	d1=f1.getDia();
+	d2=f2.getDia();
+	m1=f1.getMes();
+
+	m2=f2.getMes();
+
+	a1=f1.getAnho();
+
+	a2=f2.getAnho();
+
+	fecha1=d1+(m1*30)+(a1*365);
+
+	fecha2=d2+(m2*30)+(a2*365);
+
+	dif=fecha2-fecha1;
+
+	return dif;
+
+}
+---------------PAGOS.h-------------
+#pragma once
+#include "stdafx.h"
+#include <iostream>
+#include "Fecha.h"
+#include <stdio.h>
+#include "math.h"
+#include "Empleado.h"
+using namespace std;
+
+class Pagos
+{
+private:
+	int nro; 
+	int a,b;
+	Fecha FE; 
+	Fecha FS; 	
+	int Cod; 
+	char NombreCliente[100]; 
+	float PagoTotal;
+	Empleado E1;
+	Empleado E2;
+	Empleado E3;
+	Empleado E4;
+
+int mult(int a, int b)
+{
+ if(a==0 ||  b==0)
+   return 0;
+  else
+   {
+    return a+mult(a,b-1);
+   }
+}
+
+public:
+	Pagos() 
+	{ nro = 0; 
+	  Cod = 0; 
+	}
+
+	void setNro(int nr)
+	{ nro=nr; }
+	int getNro()
+	{ return nro; }
+
+	void seta(int A)
+	{ a=A; }
+	int geta()
+	{ return a; }
+
+	void setb(int B)
+	{ b=B; }
+	int getb()
+	{ return b; }
+
+	void setFentrada(Fecha fe)
+	{ FE.leerFecha(); }
+	Fecha setFentrada()
+	{ return FE; }
+
+	void setFsalida(Fecha fs)
+	{ FS.leerFecha(); }
+	Fecha setFsalida()
+	{ return FS; }
+
+	void setCodigo(int Co)
+	{ Cod=Co; }
+	int getCodigo()
+	{ return Cod; }
+
+	void setNombreCliente(char *nom)
+	{ NombreCliente[0]='\0';
+	strcat(NombreCliente, nom);}
+	char *getNombreCliente()
+	{ return NombreCliente; }
+
+	void setPagoTotal(float pag)
+	{ PagoTotal=pag; }
+	float getPagoTotal()
+	{ return PagoTotal; }
+
+	int multiplicar()
+	{
+		return mult(a,b);
+	}
+
+	void leer();
+	void mostrar();
+	float BuscarEmpleado(Empleado E1, Empleado E2, Empleado E3, Empleado E4, int codigo);
+	void MostrarEmpleados();
+};
+
+
+float Pagos::BuscarEmpleado(Empleado E1, Empleado E2, Empleado E3, Empleado E4, int codigo)
+{
+	if(codigo==E1.getCodigo())
+		return E1.getPagDia();
+	if(codigo==E2.getCodigo())
+		return E2.getPagDia();
+	if(codigo==E3.getCodigo())
+		return E3.getPagDia();
+	if(codigo==E4.getCodigo())
+		return E4.getPagDia();
+	if(codigo<0 && codigo>4)
+		return 0000;
+}
+
+
+void Pagos::leer() 
+{ 
+	E1.setCodigo(1); E1.setNombre("bruno"); E1.setApellidos("dias"); E1.setPagDia(80);
+	E2.setCodigo(2); E2.setNombre("maria"); E2.setApellidos("suarez"); E2.setPagDia(100);
+	E3.setCodigo(3); E3.setNombre("carla"); E3.setApellidos("moreno"); E3.setPagDia(150);
+	E4.setCodigo(4); E4.setNombre("ricardo"); E4.setApellidos("soliz"); E4.setPagDia(200);
+	E1.mostrar();
+	cout<<endl;
+	E2.mostrar();
+	cout<<endl;
+	E3.mostrar();
+	cout<<endl;
+	E4.mostrar();
+	cout<<endl;
+	int nr; 
+	Fecha fe; 
+	Fecha fs; 	
+	int co,a,b; 
+	printf("Numero: ");
+	scanf("%i", &nr);
+	setNro(nr);
+	cout<<"Fecha de Ingreso: ";
+	FE.leerFecha();
+	cout<<"Fecha de Salida: ";
+	FS.leerFecha();
+	printf("Codigo: ");
+	scanf("%i", &co);
+	setCodigo(co);
+	printf("Ingrese el primer numero a mult: ");
+	scanf("%i", &a);
+	seta(a);
+	printf("Ingrese el segundo numero a mult: ");
+	scanf("%i", &b);
+	setb(b);
+}
+
+void Pagos::mostrar() 
+{ 
+	printf("Numero: ");
+	printf("%i\n", getNro());
+	cout<<"Fecha de Ingreso: "<<endl;
+	FE.mostrarFecha();
+	cout<<"Fecha de Salida: "<<endl;
+	FS.mostrarFecha();
+	printf("Codigo: ");
+	printf("%i\n", getCodigo());
+	int dias= diferencia(FE,FS);
+	cout<<"Dias trabajados: "<<dias<<endl;
+	float pago=BuscarEmpleado(E1, E2, E3, E4, getCodigo());
+	cout<<"El pago correspondiente es de: "<<pago<<endl;
+	float PagoTotal=(pago*dias);
+	printf("Pago Total al empleado: ");
+	printf("%f\n", PagoTotal);
+}
+
+-----------MAIN-----------
+
+#include "stdafx.h"
+#include <stdio.h>
+#include <iostream>
+#include "math.h"
+#include "Pagos.h"
+using namespace std;
+
+void main()
+{ int m;
+	Pagos P1;
+	P1.leer();
+	cout<<endl;
+	P1.mostrar();
+	m= P1.multiplicar();
+	cout<<"La multiplicacion es:";
+	cout<<m;
+	getch();
+	
+}
